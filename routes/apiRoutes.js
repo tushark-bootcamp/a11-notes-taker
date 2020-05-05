@@ -19,6 +19,7 @@ module.exports = function (app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function (req, res) {
+    console.log("notesData.notesArray: " + notesData);
     res.json(notesData);
   });
 
@@ -37,7 +38,7 @@ module.exports = function (app) {
     // req.body is available since we're using the body parsing middleware
 
     notesData.push(req.body);
-    res.json({ ok: true });
+    res.json(true);
 
   });
 
@@ -51,6 +52,6 @@ module.exports = function (app) {
     var toDelete = req.params.id;
     var hasDeleted = notesData.pop(toDelete);
 
-    res.json({ ok: hasDeleted });
+    res.json(true);
   });
 };

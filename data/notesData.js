@@ -1,6 +1,6 @@
 // Initially set dummy notes title and some text against it.
 // Write code to read the notes saved in file and return it as an array of JSON obj - notesArray
-var currentId = 1;
+//var currentId = 1;
 var notesArray = [
     {
         id: 1,
@@ -9,6 +9,9 @@ var notesArray = [
     }
 ];
 
-function nextId() {
+/*function nextId() {
     return currentId++;
-}
+}*/
+
+module.exports = notesArray;
+
