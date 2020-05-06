@@ -32,6 +32,17 @@ var saveNote = (note, notesArray) => {
     });
   }
 
+  var deleteNote = (noteId, notesArray) => {
+    console.log("toDelete: " + noteId);
+    notesArray.forEach( (note, i) => {
+      console.log("ith id: " + i + " " + note.id);
+      if(note.id === noteId) {
+        notesArray.splice(i, 1);
+      }
+    });
+    createNoteDB(notesArray);
+  }
+
   var uuidv4 = () => {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -42,6 +53,7 @@ var saveNote = (note, notesArray) => {
 module.exports = {
     getNotesDB: getNotesDB,
     saveNote: saveNote,
-    createNoteDB: createNoteDB
+    createNoteDB: createNoteDB,
+    deleteNote: deleteNote
 }
 

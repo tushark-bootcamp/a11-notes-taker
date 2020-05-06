@@ -54,12 +54,7 @@ module.exports = function (app) {
   app.delete("/api/notes/:id", function (req, res) {
     // Empty out the arrays of data
     var toDelete = req.params.id;
-    notesArray.forEach( (note, i) => {
-      if(note.id === toDelete) {
-        notesArray.pop(note);
-      }
-    });
-    notesData.createNoteDB(notesArray);
+    notesData.deleteNote(toDelete, notesArray);
     res.json(true);
   });
 };
