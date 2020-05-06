@@ -5,6 +5,15 @@
 // ===============================================================================
 
 var notesData = require("../data/notesData");
+var notesDB = notesData.getNotesDB();
+var notesArray = JSON.parse(notesDB); 
+var fs = require("fs");
+
+var newNote = {
+  id: "",
+  title: "",
+  text: ""
+}
 
 
 // ===============================================================================
@@ -19,8 +28,8 @@ module.exports = function (app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function (req, res) {
-    console.log("notesData.notesArray: " + notesData);
-    res.json(notesData);
+    console.log("notesData.getNotesDB(): " + notesDB);
+    res.json(notesArray);
   });
 
   // API POST Requests
@@ -37,7 +46,10 @@ module.exports = function (app) {
     // the new title and text value that was saved
     // req.body is available since we're using the body parsing middleware
 
-    notesData.push(req.body);
+    var newNote = req.body;
+
+    // save the new note to file by first setting the UUID
+    saveNote(newNote);
     res.json(true);
 
   });
@@ -50,8 +62,38 @@ module.exports = function (app) {
   app.delete("/api/notes/:id", function (req, res) {
     // Empty out the arrays of data
     var toDelete = req.params.id;
-    var hasDeleted = notesData.pop(toDelete);
-
+    notesArray.forEach( (note, i) => {
+      if(note.id === toDelete) {
+        notesArray.pop(note);
+      }
+    });
+    createNoteDB();
     res.json(true);
   });
 };
+
+function saveNote(note) {
+  var uuid = uuidv4();
+  console.log("logging note: ");
+  console.log(note);
+  // Caste back the note object into newNote object with the id field
+  newNote = JSON.parse(JSON.stringify(note));
+  newNote.id = uuid;
+  notesArray.push(newNote);
+  createNoteDB();
+}
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+function createNoteDB() {
+  var notes = JSON.stringify(notesArray);
+  fs.writeFileSync("./db/db.json", notes + '\n', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+}

@@ -9,7 +9,7 @@ var activeNote = {};
 
 // A function for getting all notes from the db
 var getNotes = function () {
-  alert("getNotes");
+  //alert("getNotes");
   return $.ajax({
     url: "/api/notes",
     method: "GET"
@@ -35,7 +35,7 @@ var deleteNote = function (id) {
 
 // If there is an activeNote, display it, otherwise render empty inputs
 var renderActiveNote = function () {
-  alert("renderActiveNote");
+  //alert("renderActiveNote");
   $saveNoteBtn.hide();
 
   if (activeNote.id) {
@@ -53,7 +53,7 @@ var renderActiveNote = function () {
 
 // Get the note data from the inputs, save it to the db and update the view
 var handleNoteSave = function () {
-  alert("handleNoteSave");
+  //alert("handleNoteSave");
   var newNote = {
     title: $noteTitle.val(),
     text: $noteText.val()
