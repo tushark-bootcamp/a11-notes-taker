@@ -5,12 +5,7 @@
 // ===============================================================================
 
 var notesData = require("../data/notesData");
-var notesDB = notesData.getNotesDB();
-var notesArray = JSON.parse(notesDB); 
-var fs = require("fs");
-
-var newNote = require("./objects/note");
-
+var notesArray = [];
 
 // ===============================================================================
 // ROUTING
@@ -24,6 +19,9 @@ module.exports = function (app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function (req, res) {
+    var notesDB = notesData.getNotesDB();
+    // Set the list of notes read from file into the global notesArray[]
+    notesArray = JSON.parse(notesDB); 
     console.log("notesData.getNotesDB(): " + notesDB);
     res.json(notesArray);
   });
@@ -43,7 +41,7 @@ module.exports = function (app) {
     // req.body is available since we're using the body parsing middleware
 
     // save the new note to file by first setting the UUID
-    saveNote(req.body);
+    notesData.saveNote(req.body, notesArray);
     res.json(true);
 
   });
@@ -61,33 +59,7 @@ module.exports = function (app) {
         notesArray.pop(note);
       }
     });
-    createNoteDB();
+    notesData.createNoteDB(notesArray);
     res.json(true);
   });
 };
-
-function saveNote(note) {
-  var uuid = uuidv4();
-  console.log("logging note: ");
-  console.log(note);
-  // Caste back the note object into newNote object with the id field
-  newNote = JSON.parse(JSON.stringify(note));
-  newNote.id = uuid;
-  notesArray.push(newNote);
-  createNoteDB();
-}
-
-function uuidv4() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
-
-function createNoteDB() {
-  var notes = JSON.stringify(notesArray);
-  fs.writeFileSync("./db/db.json", notes + '\n', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
-}
