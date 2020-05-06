@@ -35,7 +35,7 @@ var saveNote = (note, notesArray) => {
   var deleteNote = (noteId, notesArray) => {
     console.log("toDelete: " + noteId);
     notesArray.forEach( (note, i) => {
-      console.log("ith id: " + i + " " + note.id);
+      //console.log("ith id: " + i + " " + note.id);
       if(note.id === noteId) {
         notesArray.splice(i, 1);
       }
