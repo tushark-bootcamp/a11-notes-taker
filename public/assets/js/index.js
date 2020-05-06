@@ -60,7 +60,7 @@ var handleNoteSave = function () {
   };
 
   saveNote(newNote).then(function (data) {
-    alert("saveNote");
+    //alert("saveNote");
     getAndRenderNotes();
     renderActiveNote();
   });

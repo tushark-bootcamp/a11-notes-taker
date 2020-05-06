@@ -9,11 +9,7 @@ var notesDB = notesData.getNotesDB();
 var notesArray = JSON.parse(notesDB); 
 var fs = require("fs");
 
-var newNote = {
-  id: "",
-  title: "",
-  text: ""
-}
+var newNote = require("./objects/note");
 
 
 // ===============================================================================
@@ -46,10 +42,8 @@ module.exports = function (app) {
     // the new title and text value that was saved
     // req.body is available since we're using the body parsing middleware
 
-    var newNote = req.body;
-
     // save the new note to file by first setting the UUID
-    saveNote(newNote);
+    saveNote(req.body);
     res.json(true);
 
   });
