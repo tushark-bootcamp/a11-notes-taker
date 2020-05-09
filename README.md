@@ -1,6 +1,6 @@
 # a11-notes-taker
 
-[![Generic badge](https://img.shields.io/badge/TeamProfile-Generator-green.svg)](https://github.com/tushark-bootcamp/a11-notes-taker)
+[![Generic badge](https://img.shields.io/badge/NotesTaker-App-green.svg)](https://github.com/tushark-bootcamp/a11-notes-taker)
 
 ## Description
 
@@ -21,7 +21,7 @@ The user can take notes from a front-end app and save it to a file that can be r
 
 - Install Visual studio code
 - Install npm
-- Install node v12.1
+- Install express package and file package
 
 ## Usage
 
@@ -40,10 +40,10 @@ Uses TDD; test scripts to test instantiation of all objects and its methods.
 - https://www.linkedin.com/in/tushar-kolwalkar-80ba1/?originalSubdomain=au
 - ktusharhk@gmail.com
 
-## Page 1 - Snapshot of using inquirer to generate team profile HTML file
+## Page 1 - Home page of the notes taker app
 
-![image](https://github.com/tushark-bootcamp/a10-employee-prof-templ-engine/blob/master/employee-profiles.png)
+![image](https://github.com/tushark-bootcamp/a11-notes-taker/blob/master/home-page.png)
 
-## Page 2 - Snapshot of the team profile html page generated using the CLI tool
+## Page 2 - Page that displays saved notes 
 
-![image](https://github.com/tushark-bootcamp/a10-employee-prof-templ-engine/blob/master/employee-profiles-2.png)
+![image](https://github.com/tushark-bootcamp/a11-notes-taker/blob/master/notes-view.png)
